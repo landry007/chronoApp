@@ -1,20 +1,29 @@
-<ion-tabs>
+<ion-content class="ion-padding ion-justify-content-center ion-align-items-center">
 
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1">
-      <ion-icon name="flash"></ion-icon>
-      <ion-label>Tab One</ion-label>
-    </ion-tab-button>
+  <ion-item color="dark">
+    <ion-label>Temps Restant</ion-label>
+    <ion-datetime display-format="mm:ss" placeholder="Tap" [(ngModel)]="fullTime"></ion-datetime>
+  </ion-item>
+  <circle-progress (click)="starTimer()" [percent]="percent" [maxPercent]="100" [radius]="radius"
+    [outerStrokeWidth]="16" [innerStrokeWidth]="8" [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'"
+    [animationDuration]="300" [backgroundStroke]="'#33003f'" [backgroundStrokeWidth]="3" [outerStrokeColor]="'#8000FF'"
+    [outerStrokeGradientStopColor]="'#FF00CB'" [showSubtitle]="false" [showTitle]="false" [showUnits]="false"
+    [animation]="false" [showInnerStroke]="false"></circle-progress>
 
-    <ion-tab-button tab="tab2">
-      <ion-icon name="apps"></ion-icon>
-      <ion-label>Tab Two</ion-label>
-    </ion-tab-button>
+  <p>{{ elapseTime.hour }}: {{ elapseTime.minutes }}: {{ elapseTime.secondes}} </p>
 
-    <ion-tab-button tab="tab3">
-      <ion-icon name="send"></ion-icon>
-      <ion-label>Tab Three</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
+  <!-- fab placed to the bottom end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ng-container *ngIf="timer == false; else running" >
+      <ion-fab-button (click)="starTimer()" >
+        <ion-icon name="play"></ion-icon>
+      </ion-fab-button>
+    </ng-container>
+    <ng-template #running >
+      <ion-fab-button (click)="stopTimer()">
+      <ion-icon name="square"></ion-icon>
+      </ion-fab-button>
+    </ng-template>
+  </ion-fab>
 
-</ion-tabs>
+</ion-content>
